@@ -21,6 +21,11 @@ class Conference extends Model
         'speakers'      // Information about the speakers at the conference
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     // Enabling the use of factories for seeding fake data (useful for testing)
     use HasFactory;
 }

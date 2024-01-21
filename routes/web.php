@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ConferenceRegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +18,26 @@ use App\Http\Controllers\ConferenceController;
 |
 */
 
-// Route for the home page
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route for the list of conferences, uses the 'index' method in ConferenceController
-Route::get('/conferenceslist', [ConferenceController::class, 'index']);
+// Corrected route for the client conferences list
+Route::get('/client/conferenceslist', [ClientController::class, 'index']);
+
+// Add a similar corrected route for the employee conferences list
+// Assuming you have an EmployeeController with an 'index' method
+Route::get('/employee/conferenceslist', [EmployeeController::class, 'index']);
 
 // Route for viewing detailed information about a specific conference
 // Uses the 'view' method in ConferenceController and has a named route 'conferences.view'
 Route::get('/conference/{conference}', [ConferenceController::class, 'view'])->name('conferences.view');
+
+Route::get('/register/conference/{id}', [ConferenceRegistrationController::class, 'register'])->name('register.conference');
+Route::delete('/unregister/conference/{id}', [ConferenceRegistrationController::class, 'unregister'])->name('unregister.conference');
+
+// Route for viewing conference registrations by employees
+Route::get('/employee/conference/{conference}/registrations', [EmployeeController::class, 'viewRegistrations'])->name('conferences.view.registrations');
 
 // Authentication routes (Login, Registration, etc.) provided by Laravel
 Auth::routes();

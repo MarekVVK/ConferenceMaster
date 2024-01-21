@@ -14,13 +14,16 @@
             </div>
         </div>
 
-        <div class="text-center mt-5">
-            <h2>Access Different Roles</h2>
-            <div class="btn-group mt-3" role="group" aria-label="Basic example">
-                <a href="/conferenceslist" class="btn btn-primary">Client Dashboard</a>
-                <a href="/employee" class="btn btn-success">Employee Dashboard</a>
-                <a href="/admin" class="btn btn-danger">Admin Dashboard</a>
-            </div>
+        <div class="row mt-4 d-flex justify-content-center">
+            @if(Auth::check())
+                @if(Auth::user()->role == 'client')
+                    <a href="/client/conferenceslist" class="btn btn-primary"><span class="btn-sm">Client Dashboard</span></a>
+                @elseif(Auth::user()->role == 'employee')
+                    <a href="/employee/conferenceslist" class="btn btn-success"><span class="btn-sm">Employee Dashboard</span></a>
+                @elseif(Auth::user()->role == 'admin')
+                    <a href="/admin" class="btn btn-danger"><span class="btn-sm">Admin Dashboard</span></a>
+                @endif
+            @endif
         </div>
     </div>
 @endsection
