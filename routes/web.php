@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminConferenceController;
+use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\ConferenceRegistrationController;
@@ -65,6 +66,15 @@ Route::put('/admin/conferences/update/{id}', [AdminConferenceController::class, 
 
 // Admin: delete a conference
 Route::delete('/admin/conferences/destroy/{id}', [AdminConferenceController::class, 'destroyConference'])->name('admin.conferences.destroy');
+
+// Admin: list all users in the admin dashboard
+Route::get('/admin/users', [AdminUsersController::class, 'index'])->name('admin.users');
+
+// Admin: edit a specific user
+Route::get('/admin/users/edit/{id}', [AdminUsersController::class, 'edit'])->name('admin.users.edit');
+
+//Admin: update a specific user
+Route::put('/admin/users/update/{id}', [AdminUsersController::class, 'update'])->name('admin.users.update');
 
 // Authentication routes (Login, Registration, etc.) provided by Laravel
 Auth::routes();
